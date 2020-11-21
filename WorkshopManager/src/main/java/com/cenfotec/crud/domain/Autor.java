@@ -1,9 +1,7 @@
 package com.cenfotec.crud.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Autor {
@@ -13,6 +11,7 @@ public class Autor {
 	private long id;
 	
 	private String nombre;
-
-
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "autor")
+	private Set<Workshop> workshops;
 }

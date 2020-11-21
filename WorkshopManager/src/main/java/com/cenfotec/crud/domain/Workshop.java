@@ -19,6 +19,10 @@ public class Workshop {
 	@JoinColumn(name = "categoria_id", nullable = false)
 	private Categoria categoria;
 
+	@ManyToOne
+	@JoinColumn(name = "autor_id",nullable = false)
+	private Autor autor;
+
 	public Workshop() {
 	}
 
@@ -48,6 +52,30 @@ public class Workshop {
 
 	public void setTareas(Set<Tarea> tareas) {
 		this.tareas = tareas;
+	}
+
+	public String getObjective() {
+		return objective;
+	}
+
+	public void setObjective(String objective) {
+		this.objective = objective;
+	}
+
+	public Autor getAutor() {
+		return autor;
+	}
+
+	public void setAutor(Autor autor) {
+		this.autor = autor;
+	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 }
 
