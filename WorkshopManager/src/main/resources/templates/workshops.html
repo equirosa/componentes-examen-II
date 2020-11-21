@@ -6,14 +6,23 @@
 <title>Workshops</title>
 </head>
 <body>
-Insertar:
-<form action="#" th:action="@{/workshops/create}" th:object="${workshop}" method="post">
-    <label for="name">Nombre</label>
-    <input type="text" th:field="*{name}" id="name">
-    <label for="objective">Objetivo</label>
-    <input type="text" th:field="*{objective}" id="objective">
-    <input type="submit" value="Agregar Workshop">
-</form>
+<h2>Lista de Workshops</h2>
+
+<ul>
+    <div th:each="entry : ${workshops}">
+        <li>
+            <h4>
+                <span th:text="${entry.name}">Name</span>
+            </h4>
+            <label for="description">Description:</label>
+            <span id="description" th:text="${entry.description}">Description</span>
+            <br>
+            <label for="creation">Date Created:</label>
+            <span id="creation" th:text="${entry.creation}">Created</span>
+            <a th:href="@{/listar/{id}(id=${entry.id}}">Editar</a>
+        </li>
+    </div>
+</ul>
 
 </body>
 </html>

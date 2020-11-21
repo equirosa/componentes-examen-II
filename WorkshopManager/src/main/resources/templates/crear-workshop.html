@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear Workshop</title>
+</head>
+<body>
+<h1>Crear Workshop</h1>
+<form action="#" th:action="@{/workshops/create}" th:object="${workshop}" method="post">
+    <label for="name">Nombre</label>
+    <input type="text" th:field="*{name}" id="name">
+    <label for="objective">Objetivo</label>
+    <input type="text" th:field="*{objective}" id="objective">
+    <input type="submit" value="Agregar Workshop">
+</form>
+</body>
+</html>
