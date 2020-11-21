@@ -26,7 +26,7 @@ public class CategoriaServiceImpl implements CategoriaService {
 
 	@Override
 	public List<Categoria> find(String name) {
-		return repo.findByNameContaining(name);
+		return repo.findCategoriaByNameContaining(name);
 	}
 
 	@Override

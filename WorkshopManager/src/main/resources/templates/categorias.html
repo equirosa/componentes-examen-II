@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en-US" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"></meta>
+<meta http-equiv="Content-Type" content="text/html"></meta>
+<title>Categorias</title>
+</head>
+<body>
+<h2>Lista de Categorias</h2>
+
+<ul>
+    <div th:each="entry : ${categorias}">
+        <li>
+            <h4>
+                <span th:text="${entry.name}">Name</span>
+            </h4>
+            <a>Editar</a>
+        </li>
+    </div>
+</ul>
+<a href="/categorias/insertar" method="get">Insertar</a>
+</body>
+</html>
