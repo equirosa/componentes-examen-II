@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en-US" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8"/>
+	<meta http-equiv="Content-Type" content="text/html"/>
+<title>Workshops</title>
+</head>
+<body>
+	<div>
+		<h1>List of Anthologies</h1>
+		<ul>
+			<div th:each="entry : ${workshops}">
+				<li>
+					<h4>
+						<span th:text="${entry.name}">Name</span>
+					</h4>
+					<label for="description">Description:</label>
+					<span id="description" th:text="${entry.description}">Description</span>
+					<br>
+					<label for="creation">Date Created:</label>
+					<span id="creation" th:text="${entry.creation}">Created</span>
+					<a th:href="@{/listar/{id}(id=${entry.id}}">Editar</a>
+				</li>
+			</div>
+		</ul>
+	</div>
+</body>
+</html>
