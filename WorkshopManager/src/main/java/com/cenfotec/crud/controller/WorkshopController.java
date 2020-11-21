@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class WorkshopController {
@@ -97,5 +98,12 @@ public class WorkshopController {
 	public String editar(@PathVariable("id") Long id, Model model) {
 		model.addAttribute(workshopService.get(id));
 		return "listar";
+	}
+
+	@RequestMapping(value = "/autores/editar/{id}")
+	public String editarAutor(@PathVariable("id") Long id, Model model){
+		Optional<Autor> autor = autorService.get(id);
+		model.addAttribute(autor);
+		return "crear-autor";
 	}
 }

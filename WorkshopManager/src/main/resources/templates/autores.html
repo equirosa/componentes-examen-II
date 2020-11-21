@@ -14,7 +14,7 @@
             <h4>
                 <span th:text="${entry.name}">Name</span>
             </h4>
-            <a>Editar</a>
+            <a th:href="@{/autores/edit/{id}(id=${entry.id})}">Editar</a>
         </li>
     </div>
 </ul>
