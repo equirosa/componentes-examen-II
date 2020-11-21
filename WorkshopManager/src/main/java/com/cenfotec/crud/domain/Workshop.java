@@ -10,7 +10,7 @@ public class Workshop {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-	private String name, description, objective;
+	private String name, description, objective, keywords;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "workshop")
 	private Set<Tarea> tareas;
@@ -19,9 +19,7 @@ public class Workshop {
 	@JoinColumn(name = "categoria_id", nullable = false)
 	private Categoria categoria;
 
-	@ManyToOne
-	@JoinColumn(name = "autor_id",nullable = false)
-	private Autor autor;
+	private String autor;
 
 	public Workshop() {
 	}
@@ -62,11 +60,11 @@ public class Workshop {
 		this.objective = objective;
 	}
 
-	public Autor getAutor() {
+	public String getAutor() {
 		return autor;
 	}
 
-	public void setAutor(Autor autor) {
+	public void setAutor(String autor) {
 		this.autor = autor;
 	}
 
@@ -76,6 +74,14 @@ public class Workshop {
 
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
+	}
+
+	public String getKeywords() {
+		return keywords;
+	}
+
+	public void setKeywords(String keywords) {
+		this.keywords = keywords;
 	}
 }
 

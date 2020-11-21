@@ -1,9 +1,7 @@
 package com.cenfotec.crud.controller;
 
-import com.cenfotec.crud.domain.Autor;
 import com.cenfotec.crud.domain.Categoria;
 import com.cenfotec.crud.domain.Workshop;
-import com.cenfotec.crud.service.autores.AutorService;
 import com.cenfotec.crud.service.categorias.CategoriaService;
 import com.cenfotec.crud.service.workshops.WorkshopService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class WorkshopController {
@@ -26,30 +23,9 @@ public class WorkshopController {
 	@Autowired
 	CategoriaService categoriaService;
 
-	@Autowired
-	AutorService autorService;
-
 	@RequestMapping("/")
 	public String home(Model model) {
 		return "index";
-	}
-
-	@RequestMapping("/autores")
-	public String listarAutores(Model model){
-		model.addAttribute("autores", autorService.getAll());
-		return "autores";
-	}
-
-	@RequestMapping(value = "/autores/insertar", method = RequestMethod.GET)
-	public String insertarAutorPage(Model model) {
-		model.addAttribute(new Autor());
-		return "crear-autor";
-	}
-
-	@RequestMapping(value = "/autores/insertar", method = RequestMethod.POST)
-	public String insertarAutorAction(Autor autor, BindingResult result, Model model){
-		autorService.save(autor);
-		return listarAutores(model);
 	}
 
 	@RequestMapping(value = "/workshops/insertar", method = RequestMethod.GET)
@@ -57,9 +33,6 @@ public class WorkshopController {
 		List<Categoria> categorias = categoriaService.getAll();
 		if (categorias.size()==0)
 			return "no-categorias";
-		List<Autor> autores = autorService.getAll();
-		if (autores.size()==0)
-			return "no-autores";
 		model.addAttribute(new Workshop());
 		return "crear-workshop";
 	}
@@ -98,12 +71,5 @@ public class WorkshopController {
 	public String editar(@PathVariable("id") Long id, Model model) {
 		model.addAttribute(workshopService.get(id));
 		return "listar";
-	}
-
-	@RequestMapping(value = "/autores/editar/{id}")
-	public String editarAutor(@PathVariable("id") Long id, Model model){
-		Optional<Autor> autor = autorService.get(id);
-		model.addAttribute(autor);
-		return "crear-autor";
 	}
 }
