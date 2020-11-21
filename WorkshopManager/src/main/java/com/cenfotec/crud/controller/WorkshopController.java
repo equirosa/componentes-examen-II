@@ -1,7 +1,7 @@
 package com.cenfotec.crud.controller;
 
 import com.cenfotec.crud.domain.Workshop;
-import com.cenfotec.crud.service.WorkshopService;
+import com.cenfotec.crud.service.workshops.WorkshopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,27 +16,33 @@ public class WorkshopController {
 	@Autowired
 	WorkshopService workshopService;
 
+//	@Autowired
+//	CategoriaService categoriaService;
+
 	@RequestMapping("/")
 	public String home(Model model) {
 		return "index";
 	}
 
-	@RequestMapping(value = "/insertar", method = RequestMethod.GET)
+	@RequestMapping(value = "/workshops/insertar", method = RequestMethod.GET)
 	public String insertarPage(Model model) {
+//		List<Categoria> categorias = categoriaService.getAll();
+//		if (categorias.size()==0)
+//			return "no-categorias";
 		model.addAttribute(new Workshop());
-		return "insertar";
+		return "crear-workshop";
 	}
 
-	@RequestMapping(value = "/insertar", method = RequestMethod.POST)
+	@RequestMapping(value = "/workshops/insertar", method = RequestMethod.POST)
 	public String insertarAction(Workshop workshop, BindingResult result, Model model) {
 		workshopService.save(workshop);
-		return "index";
+		return "workshops";
 	}
 
 	@RequestMapping("/workshops")
 	public String listar(Model model) {
 		model.addAttribute("workshops", workshopService.getAll());
-		return "listar";
+		return "workshops";
 	}
 
 	@RequestMapping("/listar/{id}")

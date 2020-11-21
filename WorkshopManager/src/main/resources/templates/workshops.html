@@ -14,15 +14,15 @@
             <h4>
                 <span th:text="${entry.name}">Name</span>
             </h4>
-            <label for="description">Description:</label>
-            <span id="description" th:text="${entry.description}">Description</span>
+<!--            <label for="description">Description:</label>-->
+<!--            <span id="description" th:text="${entry.description}">Description</span>-->
             <br>
-            <label for="creation">Date Created:</label>
-            <span id="creation" th:text="${entry.creation}">Created</span>
-            <a th:href="@{/listar/{id}(id=${entry.id}}">Editar</a>
+<!--            <label for="creation">Date Created:</label>-->
+<!--            <span id="creation" th:text="${entry.creation}">Created</span>-->
+<!--            <a th:href="@{/listar/{id}(id=${entry.id}}">Editar</a>-->
         </li>
     </div>
 </ul>
-
+<a href="/workshops/insertar" method="get">Insertar</a>
 </body>
 </html>

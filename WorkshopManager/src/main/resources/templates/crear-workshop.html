@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>Crear Workshop</h1>
-<form action="#" th:action="@{/workshops/create}" th:object="${workshop}" method="post">
+<form action="#" th:action="@{/workshops/insertar}" th:object="${workshop}" method="post">
     <label for="name">Nombre</label>
     <input type="text" th:field="*{name}" id="name">
     <label for="objective">Objetivo</label>

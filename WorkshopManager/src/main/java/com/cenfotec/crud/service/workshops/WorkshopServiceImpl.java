@@ -1,4 +1,4 @@
-package com.cenfotec.crud.service;
+package com.cenfotec.crud.service.workshops;
 
 import com.cenfotec.crud.domain.Workshop;
 import com.cenfotec.crud.repo.WorkshopRepository;
