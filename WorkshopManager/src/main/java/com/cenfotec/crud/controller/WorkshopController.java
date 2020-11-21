@@ -35,18 +35,20 @@ public class WorkshopController {
 
 	@RequestMapping("/autores")
 	public String listarAutores(Model model){
+		model.addAttribute("autores", autorService.getAll());
 		return "autores";
 	}
 
 	@RequestMapping(value = "/autores/insertar", method = RequestMethod.GET)
 	public String insertarAutorPage(Model model) {
+		model.addAttribute(new Autor());
 		return "crear-autor";
 	}
 
 	@RequestMapping(value = "/autores/insertar", method = RequestMethod.POST)
 	public String insertarAutorAction(Autor autor, BindingResult result, Model model){
 		autorService.save(autor);
-		return "/autores";
+		return listarAutores(model);
 	}
 
 	@RequestMapping(value = "/workshops/insertar", method = RequestMethod.GET)
@@ -64,7 +66,7 @@ public class WorkshopController {
 	@RequestMapping(value = "/workshops/insertar", method = RequestMethod.POST)
 	public String insertarWorkshopAction(Workshop workshop, BindingResult result, Model model) {
 		workshopService.save(workshop);
-		return "workshops";
+		return listarWorkshops(model);
 	}
 
 	@RequestMapping("/workshops")
@@ -88,7 +90,7 @@ public class WorkshopController {
 	@RequestMapping(value = "/categorias/insertar", method = RequestMethod.POST)
 	public String insertarCategoriaAction(Categoria categoria, BindingResult result,Model model) {
 		categoriaService.save(categoria);
-		return "/categorias";
+		return listarCategorias(model);
 	}
 
 	@RequestMapping("/listar/{id}")
