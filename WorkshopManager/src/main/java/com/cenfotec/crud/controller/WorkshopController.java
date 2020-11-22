@@ -39,19 +39,19 @@ public class WorkshopController {
 
 	@RequestMapping(value = "/export/{id}")
 	public String exportarWord(Model model, @PathVariable long id) throws IOException {
-		Optional<Workshop> infoWorkshop = workshopService.get(id);
-		if (infoWorkshop.isPresent()) {
+		Optional<Workshop> workshop = workshopService.get(id);
+		if (workshop.isPresent()) {
 			int duration=0;
 			String tareas;
-			for (Tarea tarea: infoWorkshop.get().getTareas()) {
+			for (Tarea tarea: workshop.get().getTareas()) {
 				duration+=tarea.getDuration();
 			}
 			XWPFDocument document = new XWPFDocument();
-			String output = infoWorkshop.get().getName() + ".docx";
+			String output = "Workshop_" + workshop.get().getName() + ".docx";
 			XWPFParagraph title = document.createParagraph();
 			title.setAlignment(ParagraphAlignment.CENTER);
 			XWPFRun titleRun = title.createRun();
-			titleRun.setText(infoWorkshop.get().getName());
+			titleRun.setText(workshop.get().getName());
 			titleRun.setColor("000000");
 			titleRun.setBold(true);
 			titleRun.setFontFamily("Arial");
@@ -69,7 +69,7 @@ public class WorkshopController {
 			XWPFParagraph subTitle = document.createParagraph();
 			subTitle.setAlignment(ParagraphAlignment.CENTER);
 			XWPFRun subTitleRun = subTitle.createRun();
-			subTitleRun.setText("Autor del taller= "+infoWorkshop.get().getAutor());
+			subTitleRun.setText("Autor del taller= "+workshop.get().getAutor());
 			titleRun2.setColor("000000");
 			titleRun2.setBold(true);
 			titleRun2.setFontFamily("Arial");
@@ -77,12 +77,12 @@ public class WorkshopController {
 
 			XWPFParagraph sectionTitle = document.createParagraph();
 			XWPFRun sectionTRun = sectionTitle.createRun();
-			sectionTRun.setText("Categoria "+infoWorkshop.get().getCategoria().getName());
+			sectionTRun.setText("Categoria "+workshop.get().getCategoria().getName());
 			sectionTRun.setColor("009933");
 			sectionTRun.setBold(true);
 			sectionTRun.setFontFamily("Courier");
 
-			for (Tarea tarea: infoWorkshop.get().getTareas()) {
+			for (Tarea tarea: workshop.get().getTareas()) {
 				XWPFParagraph sub = document.createParagraph();
 				sub.setAlignment(ParagraphAlignment.CENTER);
 				XWPFRun subTitleRu = sub.createRun();
