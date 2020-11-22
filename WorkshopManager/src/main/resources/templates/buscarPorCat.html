@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en-US" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"></meta>
+    <meta content="text/html" http-equiv="Content-Type"></meta>
+    <title>Workshops</title>
+</head>
+<body>
+<h2>Lista de Workshops por Categoria</h2>
+
+
+<form action="#" method="post" th:action="@{/buscarPorCat}" th:object="${categoria}">
+    <label for="categoriaSelect">Categoria</label>
+    <select id="categoriaSelect" th:field="*{id}">
+        <option th:each="categoria : ${categorias}" th:text="${categoria.name}" th:value="${categoria.id}"></option>
+    </select>
+    <input type="submit" value="Buscar Workshop">
+</form>
+
+<ul>
+    <div th:each="entry : ${workshops}">
+        <li>
+            <h4>
+                <span th:text="${entry.name}">Name</span>
+            </h4>
+            <label for="categoria">Categoria:</label>
+            <span id="categoria" th:text="${entry.categoria.name}"></span>
+            <label for="description">Descripcion:</label>
+            <span id="description" th:text="${entry.description}">Descripcion</span>
+            <br>
+            <label for="objective">Objetivo:</label>
+            <span id="objective" th:text="${entry.objective}">Objetivo</span>
+            <br>
+            <label for="autor">Autor: </label>
+            <span id="autor" th:text="${entry.autor}">Autor</span>
+            <br>
+            <label for="duracion">Duracion: </label>
+            <span id="duracion" th:text="${entry.duracionTotal}">Duracion</span>
+            <br>
+            <span><a th:href="@{/workshops/{id}(id=${entry.id})}" method="get">Editar</a></span>
+        </li>
+    </div>
+</ul>
+<div>
+    <a href="/">Regresar</a>
+</div>
+</body>
+</html>

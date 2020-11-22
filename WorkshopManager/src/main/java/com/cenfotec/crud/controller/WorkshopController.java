@@ -33,6 +33,13 @@ public class WorkshopController {
 		return "index";
 	}
 
+	@RequestMapping(value = "/workshopsPorCat", method = RequestMethod.GET)
+	public String buscarPorCat(Model model){
+		model.addAttribute("categorias", categoriaService.getAll());
+		model.addAttribute("categoria", new Categoria());
+		return "buscarPorCat";
+	}
+
 	@RequestMapping(value = "/workshops/insertar", method = RequestMethod.GET)
 	public String insertarWorkshopPage(Model model) {
 		List<Categoria> categorias = categoriaService.getAll();
@@ -73,9 +80,10 @@ public class WorkshopController {
 		return "categorias";
 	}
 
-	@RequestMapping(value = "/categorias/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/categorias/delete/{id}", method = RequestMethod.POST)
 	public String deleteCategoria(@PathVariable("id") long id,Model model){
 		categoriaService.delete(categoriaService.get(id).get());
+//		model.addAttribute("categorias",categoriaService.getAll());
 		return "categorias";
 	}
 	
