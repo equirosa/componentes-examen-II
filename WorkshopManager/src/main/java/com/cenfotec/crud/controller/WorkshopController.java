@@ -77,7 +77,7 @@ public class WorkshopController {
 
 			XWPFParagraph sectionTitle = document.createParagraph();
 			XWPFRun sectionTRun = sectionTitle.createRun();
-			sectionTRun.setText("Categoria "+infoWorkshop.get().getCategoria());
+			sectionTRun.setText("Categoria "+infoWorkshop.get().getCategoria().getName());
 			sectionTRun.setColor("009933");
 			sectionTRun.setBold(true);
 			sectionTRun.setFontFamily("Courier");
