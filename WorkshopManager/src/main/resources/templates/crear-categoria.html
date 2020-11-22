@@ -6,9 +6,9 @@
 </head>
 <body>
 <h1>Crear Categoria</h1>
-<form action="#" th:action="@{/categorias/insertar}" th:object="${categoria}" method="post">
+<form action="#" method="post" th:action="@{/categorias/insertar}" th:object="${categoria}">
     <label for="name">Nombre</label>
-    <input type="text" th:field="*{name}" id="name">
+    <input id="name" th:field="*{name}" type="text">
     <input type="submit" value="Agregar Categoria">
 </form>
 <div>

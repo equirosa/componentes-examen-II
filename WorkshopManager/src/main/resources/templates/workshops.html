@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="en-US" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="utf-8"></meta>
-<meta http-equiv="Content-Type" content="text/html"></meta>
-<title>Workshops</title>
+    <meta charset="utf-8"></meta>
+    <meta content="text/html" http-equiv="Content-Type"></meta>
+    <title>Workshops</title>
 </head>
 <body>
 <h2>Lista de Workshops</h2>
@@ -14,12 +14,10 @@
             <h4>
                 <span th:text="${entry.name}">Name</span>
             </h4>
-<!--            <label for="description">Description:</label>-->
-<!--            <span id="description" th:text="${entry.description}">Description</span>-->
+            <label for="description">Description:</label>
+            <span id="description" th:text="${entry.description}">Description</span>
             <br>
-<!--            <label for="creation">Date Created:</label>-->
-<!--            <span id="creation" th:text="${entry.creation}">Created</span>-->
-<!--            <a th:href="@{/listar/{id}(id=${entry.id}}">Editar</a>-->
+            <!--            <a th:href="@{/listar/{id}(id=${entry.id}}">Editar</a>-->
         </li>
     </div>
 </ul>
