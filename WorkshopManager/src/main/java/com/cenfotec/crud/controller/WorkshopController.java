@@ -34,6 +34,7 @@ public class WorkshopController {
 		if (categorias.size()==0)
 			return "no-categorias";
 		model.addAttribute(new Workshop());
+		model.addAttribute("categorias",categorias);
 		return "crear-workshop";
 	}
 

@@ -10,7 +10,8 @@ public class Workshop {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-	private String name, description, objective, keywords;
+	private String name, autor, description, objective, keywords;
+	private double duracionTotal;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "workshop")
 	private Set<Tarea> tareas;
@@ -18,8 +19,6 @@ public class Workshop {
 	@ManyToOne
 	@JoinColumn(name = "categoria_id", nullable = false)
 	private Categoria categoria;
-
-	private String autor;
 
 	public Workshop() {
 	}
