@@ -1,18 +1,29 @@
 <!doctype html>
 <html lang="en-US" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8"></meta>
-    <meta content="text/html" http-equiv="Content-Type"></meta>
+    <meta charset="utf-8"/>
+    <meta content="text/html" http-equiv="Content-Type"/>
     <title>Workshops</title>
 </head>
 <body>
-<h2>Lista de Workshops</h2>
+<h2>Lista de Workshops por Autor</h2>
+
+
+<form action="#" method="post" th:action="@{/buscarPorAutor}">
+    <label for="autorSelect">Autor</label>
+    <select id="autorSelect" >
+        <option th:value="Eduardo">Eduardo</option>
+        <option th:value="Carlos">Carlos</option>
+        <option th:value="Mario">Mario</option>
+        <option th:value="Paola">Paola</option>
+    </select>
+    <input type="submit" value="Buscar Workshop">
+</form>
 
 <ul>
     <div th:each="entry : ${workshops}">
         <li>
             <h4>
-                <span th:text="${entry.id}">Id</span>
                 <span th:text="${entry.name}">Name</span>
             </h4>
             <label for="categoria">Categoria:</label>
@@ -30,12 +41,10 @@
             <span id="duracion" th:text="${entry.duracionTotal}">Duracion</span>
             <br>
             <span><a th:href="@{/workshops/{id}(id=${entry.id})}" method="get">Editar</a></span>
-            <span><a th:href="@{/export/{id}(id=${entry.id})}" method="get">Exportar como Word</a></span>
         </li>
     </div>
 </ul>
 <div>
-    <a href="/workshops/insertar" method="get">Insertar</a>
     <a href="/">Regresar</a>
 </div>
 </body>

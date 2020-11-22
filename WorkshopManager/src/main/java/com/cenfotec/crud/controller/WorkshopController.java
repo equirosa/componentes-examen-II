@@ -6,6 +6,7 @@ import com.cenfotec.crud.domain.Workshop;
 import com.cenfotec.crud.service.categorias.CategoriaService;
 import com.cenfotec.crud.service.tareas.TareaService;
 import com.cenfotec.crud.service.workshops.WorkshopService;
+import org.apache.poi.xwpf.usermodel.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +15,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class WorkshopController {
@@ -31,6 +35,77 @@ public class WorkshopController {
 	@RequestMapping("/")
 	public String home(Model model) {
 		return "index";
+	}
+
+	@RequestMapping(value = "/export/{id}")
+	public String exportarWord(Model model, @PathVariable long id) throws IOException {
+		Optional<Workshop> infoWorkshop = workshopService.get(id);
+		if (infoWorkshop.isPresent()) {
+			int duration=0;
+			String tareas;
+			for (Tarea tarea: infoWorkshop.get().getTareas()) {
+				duration+=tarea.getDuration();
+			}
+			XWPFDocument document = new XWPFDocument();
+			String output = infoWorkshop.get().getName() + ".docx";
+			XWPFParagraph title = document.createParagraph();
+			title.setAlignment(ParagraphAlignment.CENTER);
+			XWPFRun titleRun = title.createRun();
+			titleRun.setText(infoWorkshop.get().getName());
+			titleRun.setColor("000000");
+			titleRun.setBold(true);
+			titleRun.setFontFamily("Arial");
+			titleRun.setFontSize(20);
+
+			XWPFParagraph title2=document.createParagraph();
+			title2.setAlignment(ParagraphAlignment.CENTER);
+			XWPFRun titleRun2 = title2.createRun();
+			titleRun2.setText(new StringBuilder().append("Duracion del taller= ").append(duration).append(" minutos").toString());
+			titleRun2.setColor("000000");
+			titleRun2.setBold(true);
+			titleRun2.setFontFamily("Arial");
+			titleRun2.setFontSize(20);
+
+			XWPFParagraph subTitle = document.createParagraph();
+			subTitle.setAlignment(ParagraphAlignment.CENTER);
+			XWPFRun subTitleRun = subTitle.createRun();
+			subTitleRun.setText("Autor del taller= "+infoWorkshop.get().getAutor());
+			titleRun2.setColor("000000");
+			titleRun2.setBold(true);
+			titleRun2.setFontFamily("Arial");
+			titleRun2.setFontSize(20);
+
+			XWPFParagraph sectionTitle = document.createParagraph();
+			XWPFRun sectionTRun = sectionTitle.createRun();
+			sectionTRun.setText("Categoria "+infoWorkshop.get().getCategoria());
+			sectionTRun.setColor("009933");
+			sectionTRun.setBold(true);
+			sectionTRun.setFontFamily("Courier");
+
+			for (Tarea tarea: infoWorkshop.get().getTareas()) {
+				XWPFParagraph sub = document.createParagraph();
+				sub.setAlignment(ParagraphAlignment.CENTER);
+				XWPFRun subTitleRu = sub.createRun();
+				subTitleRu.setColor("111111");
+				subTitleRu.setFontFamily("Courier");
+				subTitleRu.setFontSize(16);
+				subTitleRu.setTextPosition(20);
+				subTitleRu.setUnderline(UnderlinePatterns.DOT_DOT_DASH);
+				tareas= tarea.getName()+"\n"+
+						"Descripción= "+tarea.getDescription()+"\n"+
+						"Notas de la actividad= "+tarea.getTexto() +"\n";
+				subTitleRun.setText(tareas);
+
+			}
+
+			FileOutputStream out = new FileOutputStream(output);
+			document.write(out);
+			out.close();
+			document.close();
+			return "workshops";
+		} else {
+			return "error";
+		}
 	}
 
 	@RequestMapping(value = "/workshopsPorCat", method = RequestMethod.GET)
