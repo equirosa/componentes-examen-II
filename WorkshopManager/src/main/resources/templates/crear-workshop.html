@@ -11,6 +11,8 @@
     <input id="name" th:field="*{name}" type="text"><br>
     <label for="objective">Objetivo</label>
     <input id="objective" th:field="*{objective}" type="text"><br>
+    <label for="keywords">Palabras Clave</label>
+    <input th:field="*{keywords}" id="keywords" type="text">
     <label for="autor">Autor</label>
     <select id="autor">
         <option value="Eduardo">Eduardo</option>
@@ -21,7 +23,7 @@
     <div>
         <label for="selectCategorias">Categoria</label>
         <select th:field="*{categoria}" id="selectCategorias">
-            <option th:value="entry" th:each="entry : ${categorias}" th:text="${entry.name}"></option>
+            <option th:value="${entry}" th:each="entry : ${categorias}" th:text="${entry.name}"></option>
         </select>
     </div>
     <br>
