@@ -12,17 +12,29 @@
     <div th:each="entry : ${workshops}">
         <li>
             <h4>
+                <span th:text="${entry.id}">Id</span>
                 <span th:text="${entry.name}">Name</span>
             </h4>
-            <label for="description">Description:</label>
-            <span id="description" th:text="${entry.description}">Description</span>
+            <label for="categoria">Categoria:</label>
+            <span id="categoria" th:text="${entry.categoria.name}"></span>
+            <label for="description">Descripcion:</label>
+            <span id="description" th:text="${entry.description}">Descripcion</span>
             <br>
-            <!--            <a th:href="@{/listar/{id}(id=${entry.id}}">Editar</a>-->
+            <label for="objective">Objetivo:</label>
+            <span id="objective" th:text="${entry.objective}">Objetivo</span>
+            <br>
+            <label for="autor">Autor: </label>
+            <span id="autor" th:text="${entry.autor}">Autor</span>
+            <br>
+            <label for="duracion">Duracion: </label>
+            <span id="duracion" th:text="${entry.duracionTotal}">Duracion</span>
+            <br>
+            <span><a th:href="@{/workshops/{id}(id=${entry.id})}" method="get">Editar</a></span>
         </li>
     </div>
 </ul>
-<a href="/workshops/insertar" method="get">Insertar</a>
 <div>
+    <a href="/workshops/insertar" method="get">Insertar</a>
     <a href="/">Regresar</a>
 </div>
 </body>

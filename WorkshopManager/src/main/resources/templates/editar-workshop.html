@@ -2,11 +2,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Crear Workshop</title>
+    <title>Editar Workshop</title>
 </head>
 <body>
-<h1>Crear Workshop</h1>
-<form action="#" method="post" th:action="@{/workshops/insertar}" th:object="${workshop}">
+<h1>Editar Workshop</h1>
+<form action="#" method="post" th:action="@{/workshops/{id}(id=${workshop.id})}" th:object="${workshop}">
     <label for="name">Nombre</label>
     <input id="name" th:field="*{name}" type="text"><br>
     <label for="description">Descripcion</label>
@@ -29,7 +29,7 @@
         </select>
     </div>
     <br>
-    <input type="submit" value="Agregar Workshop">
+    <input type="submit" value="Guardar Cambios">
 </form>
 <div>
     <a href="/">Regresar</a>

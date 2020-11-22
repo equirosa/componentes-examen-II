@@ -11,7 +11,7 @@ public class Workshop {
 	private long id;
 
 	private String name, autor, description, objective, keywords;
-	private double duracionTotal;
+	private double duracionTotal = 0;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "workshop")
 	private Set<Tarea> tareas;
@@ -81,6 +81,18 @@ public class Workshop {
 
 	public void setKeywords(String keywords) {
 		this.keywords = keywords;
+	}
+
+	public double getDuracionTotal() {
+		return duracionTotal;
+	}
+
+	public void setDuracionTotal(double duracionTotal) {
+		this.duracionTotal = duracionTotal;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 }
 

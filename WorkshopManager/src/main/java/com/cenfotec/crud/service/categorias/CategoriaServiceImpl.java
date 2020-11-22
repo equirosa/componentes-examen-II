@@ -15,8 +15,8 @@ public class CategoriaServiceImpl implements CategoriaService {
 	CategoriaRepository repo;
 
 	@Override
-	public void save(Categoria workshop) {
-		repo.save(workshop);
+	public void save(Categoria categoria) {
+		repo.save(categoria);
 	}
 
 	@Override
@@ -27,6 +27,11 @@ public class CategoriaServiceImpl implements CategoriaService {
 	@Override
 	public List<Categoria> find(String name) {
 		return repo.findCategoriaByNameContaining(name);
+	}
+
+	@Override
+	public void delete(Categoria categoria) {
+		repo.delete(categoria);
 	}
 
 	@Override

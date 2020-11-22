@@ -9,7 +9,7 @@ public class Tarea {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-	private String name, description, resources, texto;
+	private String name, description, texto;
 	private double duration;
 
 	@ManyToOne
@@ -34,14 +34,6 @@ public class Tarea {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public String getResources() {
-		return resources;
-	}
-
-	public void setResources(String resources) {
-		this.resources = resources;
 	}
 
 	public double getDuration() {

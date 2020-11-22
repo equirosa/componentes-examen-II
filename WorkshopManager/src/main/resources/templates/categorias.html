@@ -14,7 +14,8 @@
             <h4>
                 <span th:text="${entry.name}">Name</span>
             </h4>
-            <a>Editar</a>
+            <a th:href="@{/categorias/{id}(id=${entry.id})}" method="get">Editar</a>
+            <a th:href="@{/categorias/{id}(id=${entry.id})}" method="delete">Eliminar</a>
         </li>
     </div>
 </ul>

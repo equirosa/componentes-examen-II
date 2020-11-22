@@ -1,8 +1,10 @@
 package com.cenfotec.crud.controller;
 
 import com.cenfotec.crud.domain.Categoria;
+import com.cenfotec.crud.domain.Tarea;
 import com.cenfotec.crud.domain.Workshop;
 import com.cenfotec.crud.service.categorias.CategoriaService;
+import com.cenfotec.crud.service.tareas.TareaService;
 import com.cenfotec.crud.service.workshops.WorkshopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +24,9 @@ public class WorkshopController {
 
 	@Autowired
 	CategoriaService categoriaService;
+
+	@Autowired
+	TareaService tareaService;
 
 	@RequestMapping("/")
 	public String home(Model model) {
@@ -56,6 +61,24 @@ public class WorkshopController {
 		return "categorias";
 	}
 
+	@RequestMapping(value = "/categorias/{id}", method = RequestMethod.GET)
+	public String editarCategoriaPage(@PathVariable("id") long id,Model model){
+		model.addAttribute("categoria",categoriaService.get(id).get());
+		return "editar-categoria";
+	}
+
+	@RequestMapping(value = "/categorias/{id}", method = RequestMethod.POST)
+	public String editarCategoriaAction(@PathVariable("id") long id, Model model, Categoria categoria){
+		categoriaService.save(categoria);
+		return "categorias";
+	}
+
+	@RequestMapping(value = "/categorias/{id}", method = RequestMethod.DELETE)
+	public String deleteCategoria(@PathVariable("id") long id,Model model){
+		categoriaService.delete(categoriaService.get(id).get());
+		return "categorias";
+	}
+	
 	@RequestMapping(value = "/categorias/insertar", method = RequestMethod.GET)
 	public String insertarCategoriaPage(Model model){
 		model.addAttribute(new Categoria());
@@ -68,9 +91,24 @@ public class WorkshopController {
 		return listarCategorias(model);
 	}
 
-	@RequestMapping("/listar/{id}")
-	public String editar(@PathVariable("id") Long id, Model model) {
-		model.addAttribute(workshopService.get(id));
-		return "listar";
+	@RequestMapping(value = "/workshops/{id}", method = RequestMethod.GET)
+	public String editarWorkshopPage(@PathVariable("id") Long id, Model model) {
+		Workshop workshop = workshopService.get(id).get();
+		model.addAttribute("workshop",workshop);
+		model.addAttribute("categorias",categoriaService.getAll());
+		List<Tarea> tareas = tareaService.getAll();
+		tareas.removeIf(tarea -> tarea.getWorkshop().getId() != workshop.getId());
+		model.addAttribute("tareas",tareas);
+		return "editar-workshop";
+	}
+
+	@RequestMapping(value = "/workshops/{id}", method = RequestMethod.POST)
+	public String editarWorkshopAction(@PathVariable("id") Long id, Model model, Workshop workshop) {
+		workshopService.save(workshop);
+		model.addAttribute("categorias",categoriaService.getAll());
+		List<Tarea> tareas = tareaService.getAll();
+		tareas.removeIf(tarea -> tarea.getWorkshop().getId() != workshop.getId());
+		model.addAttribute("tareas",tareas);
+		return "workshops";
 	}
 }

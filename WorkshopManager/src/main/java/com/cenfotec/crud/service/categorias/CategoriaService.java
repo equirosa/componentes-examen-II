@@ -9,12 +9,14 @@ import java.util.Optional;
 @Service
 public interface CategoriaService {
 
-	void save(Categoria workshop);
+	void save(Categoria categoria);
 
 	Optional<Categoria> get(Long id);
 
 	List<Categoria> getAll();
 
 	List<Categoria> find(String name);
+	
+	void delete(Categoria categoria);
 
 }
